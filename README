@@ -1,4 +1,4 @@
-This is a very basic application that demonstrates Play fundamentals:
+This is a very basic application that demonstrates Play (versio 2.4.11) fundamentals:
 
 - Writing controllers and actions.
 - Routing and reverse routing.
