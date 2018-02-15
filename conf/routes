@@ -24,3 +24,6 @@ POST    /computers/:id/delete       controllers.Application.delete(id:Long)
 
 # Computers list (look at the default values for pagination parameters)
 GET     /computers                  controllers.Application.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+
+# Computers list (look at the default values for pagination parameters)
+GET     /pois/:id/query                  controllers.CPOI.query(id:Long, queryInfo:String, queryType:Int)
