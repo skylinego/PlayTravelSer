@@ -13,11 +13,7 @@ import java.util.Collection;
  * POI entity managed by JPA
  */
 @Entity
-public class POI {
-
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public Long id;
+public class POI extends BaseModel {
     
     @Constraints.Required
     public String name;
@@ -48,12 +44,12 @@ public class POI {
 
     public Float rank;
 
-    @Column (name="createdAt")
+    /*@Column (name="createdAt")
     private java.sql.Timestamp createdAt;
 
     @Column (name="updatedAt")
     private java.sql.Timestamp updatedAt;
-    
+    */
     /**
      * Find a POI by id.
      */

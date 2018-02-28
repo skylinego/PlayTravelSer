@@ -8,6 +8,13 @@ CREATE TABLE `role` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `client` (
+  `id` int(10) unsigned NOT NULL,
+  `secret` varchar(100) DEFAULT NULL,
+  `token` char(80) NOT NULL,
+  `expiration` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -27,6 +34,13 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (roleID) REFERENCES role(id) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=389 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `usertoken` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `accesstoken` char(80) NOT NULL,
+  `refreshtoken` char(80) NOT NULL,
+  `expiration` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+}  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `currency` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -73,6 +87,7 @@ CREATE TABLE `poi1` (
   `location` point DEFAULT NULL,
   `isCustomized` tinyint(1) NOT NULL DEFAULT '0',
   `rank`  float DEFAULT '0.0',
+  ``
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),

@@ -27,3 +27,9 @@ GET     /computers                  controllers.Application.list(p:Int ?= 0, s ?
 
 # Computers list (look at the default values for pagination parameters)
 GET     /pois/:id/query                  controllers.CPOI.query(id:Long, queryInfo:String, queryType:Int)
+
+POST    /client/authenticate        security.CSecurity.authenticateClient()
+#POST    /user/authenticate          security.CSecurity.authenticateUser()
+#POST    /user/refresh               security.CSecurity.refreshUserAccessToken()
+
+#GET     /user/get                   controllers.Application.userDetails()
