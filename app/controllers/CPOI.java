@@ -8,14 +8,14 @@ import play.db.jpa.*;
 import play.libs.Json;
 import play.mvc.*;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
+
+import Util.*;
 
 import static play.data.Form.*;
 
 
-public class CPOI extends Controller {
+public class CPOI extends ServerController {
 
     /**
      * This result directly redirect to application home.
@@ -36,16 +36,64 @@ public class CPOI extends Controller {
             List<POI> poiList = new ArrayList<>();
             poiList.add(poi);
             return ok(Json.toJson(poiList));
-        } if (queryType ==1) {
+        } if (queryType == 1) {
             java.util.Collection<POI> poiList = new ArrayList<>();
 
             poiList = POI.findByCity(queryInfo);
 
-            //poiList.add(poi);
+            return ok(Json.toJson(poiList));
+        } if (queryType == 2) {
+            java.util.Collection<POI> poiList = new ArrayList<>();
+
+            poiList = POI.findByState(queryInfo);
+
+            return ok(Json.toJson(poiList));
+        } if (queryType == 3) {
+            java.util.Collection<POI> poiList = new ArrayList<>();
+
+            poiList = POI.findByCountry(queryInfo);
+
+            return ok(Json.toJson(poiList));
+        } if (queryType == 4) {
+            java.util.Collection<POI> poiList = new ArrayList<>();
+
+            poiList = POI.findByContient(queryInfo);
+
             return ok(Json.toJson(poiList));
         } else {
             return ok("Type is: " + queryType);
         }
+
+    }
+
+    /*
+    Create a POI
+     */
+    @Transactional
+    public Result create() {
+
+        final Map<String, String> params = ServerHttpRequest.getParamSimMap();
+        if (params == null) {
+            throw new RuntimeException("INVALID_PARAM");
+        }
+
+        String name = params.get(Param.NAME);
+
+        POI poi = new POI();
+
+        if (name!= null) {
+            poi.setName(name);
+        } else {
+            //throw new ServerRuntimeException(Constants.MISSING_PARAM, "param", Param.NAME);
+            throw new RuntimeException();
+        }
+
+        poi.save();
+
+        Map<String, Object> ret = new HashMap<String, Object>();
+        //ret.put("id", poi.getId());
+        ret.put("name", name);
+        return ServerUtil.toJsonRes(ret);
 
     }
 

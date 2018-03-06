@@ -44,6 +44,14 @@ public class POI extends BaseModel {
 
     public Float rank;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     /*@Column (name="createdAt")
     private java.sql.Timestamp createdAt;
 
@@ -58,15 +66,45 @@ public class POI extends BaseModel {
     }
 
     /**
-     * Find a POI by id.
+     * Find a POI by city.
      */
     public static java.util.Collection<POI> findByCity(String queryInfo) {
         Query query = JPA.em().createQuery("SELECT e FROM POI e where e.city =:cityName")
                 .setParameter("cityName", queryInfo)
-                .setMaxResults(10);
+                .setMaxResults(100);
         return (Collection<POI>) query.getResultList();
     }
-    
+
+    /**
+     * Find a POI by state.
+     */
+    public static java.util.Collection<POI> findByState(String queryInfo) {
+        Query query = JPA.em().createQuery("SELECT e FROM POI e where e.state =:stateName")
+                .setParameter("stateName", queryInfo)
+                .setMaxResults(100);
+        return (Collection<POI>) query.getResultList();
+    }
+
+    /**
+     * Find a POI by country.
+     */
+    public static java.util.Collection<POI> findByCountry(String queryInfo) {
+        Query query = JPA.em().createQuery("SELECT e FROM POI e where e.country =:countryName")
+                .setParameter("countryName", queryInfo)
+                .setMaxResults(100);
+        return (Collection<POI>) query.getResultList();
+    }
+
+    /**
+     * Find a POI by contient.
+     */
+    public static java.util.Collection<POI> findByContient(String queryInfo) {
+        Query query = JPA.em().createQuery("SELECT e FROM POI e where e.continentID =:contientID")
+                .setParameter("contientID", queryInfo)
+                .setMaxResults(100);
+        return (Collection<POI>) query.getResultList();
+    }
+
     /**
      * Update this computer.
      */
@@ -88,8 +126,8 @@ public class POI extends BaseModel {
             this.company = null;
         } else {
             this.company = Company.findById(company.id);
-        }
-        JPA.em().persist(this);*/
+        }*/
+        JPA.em().persist(this);
     }
     
     /**
