@@ -13,6 +13,7 @@ import java.util.Collection;
  * POI entity managed by JPA
  */
 @Entity
+@Table(name="attraction")
 public class POI extends BaseModel {
     
     @Constraints.Required
@@ -27,6 +28,10 @@ public class POI extends BaseModel {
     public String zip;
 
     public String country;
+
+    public String address;
+
+    public String placeID;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn (name="countryID")
@@ -89,8 +94,8 @@ public class POI extends BaseModel {
      * Find a POI by country.
      */
     public static java.util.Collection<POI> findByCountry(String queryInfo) {
-        Query query = JPA.em().createQuery("SELECT e FROM POI e where e.country =:countryName")
-                .setParameter("countryName", queryInfo)
+        //Query query = JPA.em().createQuery("SELECT e FROM POI e where e.country =:countryName")
+        Query query = JPA.em().createQuery("SELECT e FROM POI e")
                 .setMaxResults(100);
         return (Collection<POI>) query.getResultList();
     }
