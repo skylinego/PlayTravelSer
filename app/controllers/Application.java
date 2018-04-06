@@ -39,7 +39,7 @@ public class Application extends Controller {
         /*return ok(
             index.render(form(Hello.class))
         );*/
-        return GO_HOME;
+        return ok("Travel Server Version is 0.1.0");
     }
   
     /**

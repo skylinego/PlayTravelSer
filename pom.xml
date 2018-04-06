@@ -21,7 +21,7 @@ under the License.
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.google.code.play2-maven-plugin.test-projects.play24.java</groupId>
-    <artifactId>mobileTS</artifactId>
+    <artifactId>TravelServer</artifactId>
     <version>0.1.0</version>
     <packaging>play2</packaging>
 
@@ -141,6 +141,7 @@ under the License.
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.39</version>
         </dependency>
+
     </dependencies>
 
     <build>
