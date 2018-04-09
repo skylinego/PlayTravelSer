@@ -11,7 +11,8 @@ import java.util.Map;
 /**
  * Company entity managed by JPA
  */
-@Entity 
+@Entity
+@Table(name="continent")
 public class Continent {
 
     @Id

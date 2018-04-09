@@ -7,6 +7,7 @@ import play.data.validation.Constraints.*;
 import play.db.jpa.*;
 import play.libs.Json;
 import play.mvc.*;
+import play.Logger;
 
 import java.util.*;
 
@@ -16,6 +17,8 @@ import static play.data.Form.*;
 
 
 public class CPOI extends ServerController {
+
+    //private static final Logger logger = Logger.of(CPOI.class);
 
     /**
      * This result directly redirect to application home.
@@ -29,6 +32,8 @@ public class CPOI extends ServerController {
      */
     @Transactional(readOnly=true)
     public Result query(Long id, String queryInfo , Integer queryType) {
+
+        Logger.info("started");
 
         if (queryType ==0) {
             POI poi = POI.findById(id);
@@ -51,9 +56,15 @@ public class CPOI extends ServerController {
         } if (queryType == 3) {
             java.util.Collection<POI> poiList = new ArrayList<>();
 
-            poiList = POI.findByCountry(queryInfo);
+            try {
+                poiList = POI.findByCountry(queryInfo);
+                Logger.info("success");
+                return ok(Json.toJson(poiList));
+            } catch (Exception e) {
+                Logger.error(e.getMessage(),e);
+                return internalServerError();
+            }
 
-            return ok(Json.toJson(poiList));
         } if (queryType == 4) {
             java.util.Collection<POI> poiList = new ArrayList<>();
 

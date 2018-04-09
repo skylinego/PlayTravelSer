@@ -8,7 +8,8 @@ import javax.persistence.*;
 /**
  * Company entity managed by JPA
  */
-@Entity 
+@Entity
+@Table(name="country")
 public class Country {
 
     @Id
