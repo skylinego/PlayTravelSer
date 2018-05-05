@@ -85,7 +85,32 @@ CREATE TABLE `attraction` (
   `city` varchar(200) COLLATE utf8_unicode_ci,
   `state` varchar(100) COLLATE utf8_unicode_ci,
   `zip` varchar(20) COLLATE utf8_unicode_ci,
-  `country` char(3) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `country` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `countryID` int(10) unsigned NOT NULL DEFAULT '0',
+  `continentID` int(1) unsigned NOT NULL DEFAULT '0',
+  `isCustomized` tinyint(1) NOT NULL DEFAULT '0',
+  `rank`  float DEFAULT '0.0',
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (continentID) REFERENCES continent(id) ON DELETE CASCADE,
+  FOREIGN KEY (countryID) REFERENCES country(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `placeAttraction`;
+CREATE TABLE `placeAttraction` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `placeName` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `latitude` decimal(10,7) NOT NULL DEFAULT 0.0,
+  `longitude` decimal(10,7) NOT NULL DEFAULT 0.0,
+  `placeID` varchar(100) COLLATE utf8_unicode_ci,
+  `description` varchar(1000) COLLATE utf8_unicode_ci,
+  `city` varchar(200) COLLATE utf8_unicode_ci,
+  `state` varchar(100) COLLATE utf8_unicode_ci,
+  `zip` varchar(20) COLLATE utf8_unicode_ci,
+  `country` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `countryID` int(10) unsigned NOT NULL DEFAULT '0',
   `continentID` int(1) unsigned NOT NULL DEFAULT '0',
   `isCustomized` tinyint(1) NOT NULL DEFAULT '0',
